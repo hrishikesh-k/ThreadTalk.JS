@@ -1,0 +1,161 @@
+{{- define "main" -}}
+{{- if .IsSection -}}
+True
+{{- end -}}
+  <aside class = "w-full m:w-1/4 l:w-1/6 m:fixed m:left-5 mb-5 m:mb-0 p-2.5 m:p-0 rounded-md bg-gray-200 dark:bg-gray-700 m:bg-opacity-0 m:dark:bg-opacity-0 order-1 expanded">
+    <div class = "flex items-center justify-between cursor-pointer m:cursor-auto">
+      <div>
+        <p class = "text-xl m:text-2xl">
+          Sections
+        </p>
+      </div>
+      <div>
+        <svg xmlns = "http://www.w3.org/2000/svg" fill = "none" class = "h-5 w-5 transform -rotate-90 transition-transform ease-linear stroke-current" viewBox = "0 0 24 24">
+          <path stroke-linecap = "round" stroke-linejoin = "round" stroke-width = "2" d = "M19 9l-7 7-7-7"/>
+        </svg>
+      </div>
+    </div>
+    <div class = "w-full overflow-hidden max-h-0 transition-collapse ease-linear">
+      {{- $currentPage := . -}}
+      {{- range .Site.Menus.main -}}
+        {{- if $currentPage.IsMenuCurrent `main` . }}
+          <a href = "{{- .URL -}}" class = "w-full inline-block mt-2.5 p-2.5 rounded-md bg-yellow-400 bg-opacity-25 hover:bg-opacity-50 truncate">
+            {{- .Title -}}
+          </a>
+        {{- else -}}
+          <a href = "{{- .URL -}}" class = "w-full inline-block mt-2.5 p-2.5 rounded-md bg-yellow-400 bg-opacity-0 hover:bg-opacity-25 truncate">
+            {{- .Title -}}
+          </a>
+        {{- end -}}
+      {{- end -}}
+    </div>
+  </aside>
+  <article class = "w-full m:w-1/2 l:w-4/6 m:px-5 order-3">
+    <h1 id = "top" class = "m:pr-5 text-3xl m:text-4xl l:text-5xl">
+      {{- .Title -}}
+    </h1>
+    <div class = "w-full mt-5 flex items-center space-x-1">
+      <div class = "max-w-1/3">
+        <a href = "/" aria-label = "Home">
+          <svg xmlns = "http://www.w3.org/2000/svg" fill = "none" class = "h-5 w-5 stroke-current" viewBox = "0 0 24 24">
+            <path stroke-linecap = "round" stroke-linejoin = "round" stroke-width = "2" d = "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+        </a>
+      </div>
+      <div>
+        <svg xmlns = "http://www.w3.org/2000/svg" fill = "none" class = "h-2.5 w-2.5 stroke-current" viewBox = "0 0 24 24">
+          <path stroke-linecap = "round" stroke-linejoin = "round" stroke-width = "2" d = "M9 5l7 7-7 7"/>
+        </svg>
+      </div>
+      {{- if eq .Section "documentation" -}}
+        <div class = "max-w-1/3 truncate">
+          <a href = "/documentation/" class = "underline">
+            Documentation
+          </a>
+        </div>
+        <div>
+          <svg xmlns = "http://www.w3.org/2000/svg" fill = "none" class = "h-2.5 w-2.5 stroke-current" viewBox = "0 0 24 24">
+            <path stroke-linecap = "round" stroke-linejoin = "round" stroke-width = "2" d = "M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+        <div class = "max-w-1/3 truncate">
+          <p class = "inline">
+            {{- .Title -}}
+          </p>
+        </div>
+      {{- else -}}
+        <div class = "max-w-1/3 truncate">
+          <p>
+            Documentation
+          </p>
+        </div>
+      {{- end -}}
+    </div>
+    {{- .Content -}}
+    <div class = "w-full mt-5 flex flex-wrap">
+      {{- with .Next -}}
+        {{- if eq .Section "documentation" -}}
+          <div>
+            <a href = "{{- .RelPermalink -}}" class = "no-underline">
+              <div class = "flex items-center space-x-2.5 text-xl p-2.5 rounded-md bg-yellow-400 bg-opacity-25 hover:bg-opacity-50">
+                <div>
+                  <svg xmlns = "http://www.w3.org/2000/svg" fill = "none" class = "h-5 w-5 stroke-current" viewBox = "0 0 24 24">
+                    <path stroke-linecap = "round" stroke-linejoin = "round" stroke-width = "2" d = "M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  {{- .Title -}}
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class = "w-full l:w-0 mb-2.5"></div>
+        {{- end -}}
+      {{- end -}}
+      {{- with .Prev -}}
+        {{- if eq .Section "documentation" -}}
+          <div class = "ml-auto">
+            <a href = "{{- .RelPermalink -}}" class = "no-underline">
+              <div class = "mr-12 m:mr-0 flex items-center justify-end space-x-2.5 text-xl p-2.5 rounded-md bg-yellow-400 bg-opacity-25 hover:bg-opacity-50">
+                <div>
+                  {{- .Title -}}
+                </div>
+                <div>
+                  <svg xmlns = "http://www.w3.org/2000/svg" fill = "none" class = "h-5 w-5 stroke-current" viewBox = "0 0 24 24">
+                    <path stroke-linecap = "round" stroke-linejoin = "round" stroke-width = "2" d = "M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+              </div>
+            </a>
+          </div>
+        {{- end -}}
+      {{- end -}}
+    </div>
+  </article>
+  <aside class = "w-full m:w-1/4 l:w-1/6 m:fixed m:right-5 mb-5 m:mb-0 p-2.5 m:p-0 rounded-md bg-gray-200 dark:bg-gray-700 m:bg-opacity-0 m:dark:bg-opacity-0 order-2 expanded toc" style = "top:7.5rem">
+    <div class = "flex items-center justify-between cursor-pointer m:cursor-auto">
+      <div>
+        <p class = "text-xl m:text-2xl">
+          Contents
+        </p>
+      </div>
+      <div>
+        <svg xmlns = "http://www.w3.org/2000/svg" fill = "none" class = "h-5 w-5 stroke-current transform -rotate-90 transition-transform ease-linear stroke-current" viewBox = "0 0 24 24">
+          <path stroke-linecap = "round" stroke-linejoin = "round" stroke-width = "2" d = "M19 9l-7 7-7-7"/>
+        </svg>
+      </div>
+    </div>
+    <div class = "max-h-0 overflow-hidden m:pr-2.5 m:overflow-y-auto scrollbar-thin scrollbar-thumb-yellow-400 scrollbar-track-gray-200 dark:scrollbar-track-gray-700 scrollbar-thumb-rounded-full scrollbar-track-rounded-full transition-collapse ease-linear">
+      {{- .Scratch.Set "lastLevel" 1 -}}
+      {{- $headers := findRE "<h[2-4].*>(.|\n])+</h[2-4]>" .Content -}}
+      {{- if ge (len $headers) 1 -}}
+        <ul>
+          {{- range $headers -}}
+            {{- $header := . -}}
+            {{- $lastLevel := $.Scratch.Get "lastLevel" -}}
+            {{- $anchorName := $header | plainify | htmlUnescape -}}
+            {{- $nextLevel := int (index (findRE "[2-4]" . 1) 0) -}}
+            {{- if gt $nextLevel $lastLevel -}}
+              {{- range seq (add $lastLevel 1) $nextLevel -}}
+                <li>
+                <ul class = "toc-h{{- . -}}">
+              {{- end -}}
+            {{- else if lt $nextLevel $lastLevel -}}
+              {{- range seq (add $nextLevel 1) $lastLevel -}}
+                </ul>
+                </li>
+              {{- end -}}
+            {{- end -}}
+            <li>
+              <a href = "{{- printf `#%s` ($anchorName | anchorize) -}}" class = "w-full mt-2.5 inline-block p-2.5 rounded-md bg-yellow-400 truncate" data-turbo = "false">
+                {{- $anchorName -}}
+              </a>
+            </li>
+            {{- $.Scratch.Set "lastLevel" $nextLevel -}}
+          {{- end -}}
+        </ul>
+        </ul>
+      {{- end -}}
+    </div>
+  </aside>
+{{- end -}}

@@ -1,0 +1,42 @@
+assetDir = "docs/assets"
+baseURL = "https://www.threadtalkjs.ml/"
+contentDir = "docs/content"
+disableHugoGeneratorInject = true
+disableKinds = ["RSS", "section", "taxonomy", "term"]
+layoutDir = "docs/layouts"
+staticDir = "docs/static"
+title = "ThreadTalk.JS"
+verbose = true
+verboseLog = true
+
+[build]
+  useResourceCacheWhen = "never"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    noClasses = false
+    codeFences = false
+
+[minify]
+  minifyOutput = true
+  [minify.tdewolff]
+    [minify.tdewolff.css]
+      keepCSS2 = false
+    [minify.tdewolff.html]
+      keepDefaultAttrVals = false
+      keepConditionalComments = false
+
+[outputFormats]
+  [outputFormats.SW]
+    baseName = "sw"
+    isPlainText = true
+    mediaType = "application/javascript"
+
+[outputs]
+  home = ["HTML", "SW"]

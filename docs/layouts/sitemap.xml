@@ -1,0 +1,49 @@
+{{- (printf "<?xml version = \"1.0\" encoding=\"UTF-8\"?>") | safeHTML -}}
+<urlset xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>
+      {{- .Site.BaseURL -}}
+    </loc>
+    <changefreq>
+      {{- printf "monthly" -}}
+    </changefreq>
+    <priority>
+      {{- printf "1" -}}
+    </priority>
+  </url>
+  <url>
+    <loc>
+      {{- printf "%sdocumentation/" .Site.BaseURL -}}
+    </loc>
+    <changefreq>
+      {{- printf "monthly" -}}
+    </changefreq>
+    <priority>
+      {{- printf "0.75" -}}
+    </priority>
+  </url>
+  {{- range where .Site.RegularPages "Section" "documentation" -}}
+    <url>
+      <loc>
+        {{- .Permalink -}}
+      </loc>
+      <changefreq>
+        {{- printf "monthly" -}}
+      </changefreq>
+      <priority>
+        {{- printf "0.5" -}}
+      </priority>
+    </url>
+  {{- end -}}
+  <url>
+    <loc>
+      {{- printf "%sdemo/" .Site.BaseURL -}}
+    </loc>
+    <changefreq>
+      {{- printf "yearly" -}}
+    </changefreq>
+    <priority>
+      {{- printf "0.25" -}}
+    </priority>
+  </url>
+</urlset>

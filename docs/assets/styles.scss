@@ -1,0 +1,260 @@
+@import 'syntax';
+@import 'node_modules/tailwindcss/base';
+@import 'node_modules/tailwindcss/utilities';
+@import 'node_modules/tailwindcss/components';
+
+@font-face {
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  font-family: 'Ubuntu Mono';
+  src: url('/fonts/ubuntu-mono-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  font-family: 'Ubuntu Mono';
+  src: url('/fonts/ubuntu-mono-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  font-family: 'Ubuntu Mono';
+  src: url('/fonts/ubuntu-mono-italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+  font-family: 'Ubuntu Mono';
+  src: url('/fonts/ubuntu-mono-700-italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  font-family: 'Ubuntu';
+  src: url('/fonts/ubuntu-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  font-family: 'Ubuntu';
+  src: url('/fonts/ubuntu-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  font-family: 'Ubuntu';
+  src: url('/fonts/ubuntu-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  font-family: 'Ubuntu';
+  src: url('/fonts/ubuntu-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+  font-family: 'Ubuntu';
+  src: url('/fonts/ubuntu-300-italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  font-family: 'Ubuntu';
+  src: url('/fonts/ubuntu-italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+  font-family: 'Ubuntu';
+  src: url('/fonts/ubuntu-500-italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+  font-family: 'Ubuntu';
+  src: url('/fonts/ubuntu-700-italic.woff2') format('woff2');
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-padding-top: calc(theme('height.20') + (2 * theme('margin.5')));
+}
+
+main {
+
+  > div {
+    margin-top: calc(theme('height.20') + theme('margin.5'));
+  }
+
+}
+
+aside {
+
+  &.expanded {
+
+    > div:first-of-type {
+
+      svg {
+        @apply transform rotate-0;
+      }
+
+    }
+
+    > div:last-of-type {
+      @apply mt-5 max-h-fit;
+    }
+
+  }
+
+}
+
+header {
+
+  p:first-of-type {
+    max-width: calc(100vw - ((2 * theme('padding.5')) + (2 * theme('padding[2.5]')) + theme('width.14') + (2 * theme('spacing[2.5]')) + theme('width.10')));
+  }
+  
+}
+
+code:not(pre code) {
+  @apply p-1 rounded-md font-mono break-all bg-gray-500 text-gray-50;
+}
+
+::selection {
+  background: theme('colors.yellow.300');
+}
+
+.animate-loading {
+
+  &:nth-child(1) {
+    width: 100px;
+    height: 100px;
+    border-top-color: theme('colors.yellow.100');
+  }
+
+  &:nth-child(2) {
+    width: 110px;
+    height: 110px;
+    animation-delay: 0.1s;
+    border-top-color:theme('colors.yellow.200');
+  }
+
+  &:nth-child(3) {
+    width: 120px;
+    height: 120px;
+    animation-delay: 0.2s;
+    border-top-color:theme('colors.yellow.300');
+  }
+
+  &:nth-child(4) {
+    width: 130px;
+    height: 130px;
+    animation-delay: 0.3s;
+    border-top-color:theme('colors.yellow.400');
+  }
+
+  &:nth-child(5) {
+    width: 140px;
+    height: 140px;
+    animation-delay: 0.4s;
+    border-top-color:theme('colors.yellow.500');
+  }
+
+}
+
+.chroma {
+  @apply m-0 p-2.5 pt-10;
+}
+
+.highlight {
+  @apply w-fit;
+  width: -webkit-max-content;
+}
+
+.toc-h2 {
+  counter-reset: toc-h2;
+}
+
+.toc-h3 {
+  @apply ml-2.5;
+  counter-reset: toc-h3;
+}
+
+.toc-h4 {
+  @apply ml-5;
+  counter-reset: toc-h4;
+}
+
+.toc li a {
+  @apply bg-opacity-0 hover:bg-opacity-25;
+}
+
+.toc li.active a {
+  @apply bg-opacity-25 hover:bg-opacity-50;
+}
+
+.toc-h2 li a:before {
+  counter-increment: toc-h2;
+  content: counter(toc-h2) ': ';
+}
+
+.toc-h3 li a:before {
+  counter-increment: toc-h3;
+  content: counter(toc-h2) '.' counter(toc-h3) ': ';
+}
+
+.toc-h4 li a:before {
+  counter-increment: toc-h4;
+  content: counter(toc-h2) '.' counter(toc-h3) '.' counter(toc-h4) ': ';
+}
+
+.turbo-progress-bar {
+  @apply bg-yellow-400;
+}
+
+@screen m {
+
+  article {
+    margin-left: calc(theme('width.1/4'));
+  }
+
+  aside.expanded > div:last-of-type {
+    max-height: calc(100vh - (theme('height.20') + (4 * theme('margin.5')) + 32px));
+  }
+
+}
+
+@screen l {
+
+  article {
+    margin-left: calc(theme('width.1/6'));
+  }
+
+}

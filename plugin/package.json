@@ -1,0 +1,24 @@
+{
+  "author": "Hrishikesh Kokate",
+  "bugs": {
+    "url": "https://github.com/Hrishikesh-K/ThreadTalk.JS/discussions/"
+  },
+  "dependencies": {
+    "threadtalkjs": "1.0.0"
+  },
+  "description": "Netlify plugin to configure ThreadTalk.JS' backend on your website.",
+  "homepage": "https://www.threadtalkjs.ml/",
+  "keywords": [
+    "netlify",
+    "netlify-plugin",
+    "threadtalkjs"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "netlify-plugin-threadtalkjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hrishikesh-K/ThreadTalk.JS.git"
+  },
+  "version": "1.0.0"
+}

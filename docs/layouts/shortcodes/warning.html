@@ -1,0 +1,17 @@
+<div class = "mt-5 bg-orange-500 border-orange-700 dark-orange-red-300 p-2.5 border-l-8 rounded-md text-gray-100">
+  <div class = "flex items-center space-x-1">
+    <div>
+      <svg xmlns = "http://www.w3.org/2000/svg" fill = "none" class = "h-5 w-5 stroke-current" viewBox = "0 0 24 24">
+        <path stroke-linecap = "round" stroke-linejoin = "round" stroke-width = "2" d = "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+    </div>
+    <div>
+      <p class = "text-xl">
+        Warning
+      </p>
+    </div>
+  </div>
+  <p class = "mt-5">
+    {{- .Inner | markdownify -}}
+  </p>
+</div>

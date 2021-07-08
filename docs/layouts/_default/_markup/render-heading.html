@@ -1,0 +1,14 @@
+<div class = "flex items-center mt-7">
+  <div>
+    <a href = "#{{- .Attributes.id -}}" data-turbo = "false" aria-label = "{{- .Text | safeHTML -}}">
+      <svg xmlns = "http://www.w3.org/2000/svg" fill = "none" class = "h-5 w-5 stroke-current" viewBox = "0 0 24 24">
+        <path stroke-linecap = "round" stroke-linejoin = "round" stroke-width = "2" d = "M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/>
+      </svg>
+    </a>
+  </div>
+  <div class = "ml-2.5">
+    <h{{- .Level }} id = "{{- .Attributes.id -}}" class = "{{- .Attributes.class }} font-normal m-0">
+      {{- .Text | safeHTML -}}
+    </h{{- .Level -}}>
+  </div>
+</div>

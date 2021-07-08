@@ -1,0 +1,36 @@
+{
+  "author": "Hrishikesh Kokate",
+  "bugs": {
+    "url": "https://github.com/Hrishikesh-K/ThreadTalk.JS/discussions/"
+  },
+  "dependencies": {
+    "emailjs": "3.5.0",
+    "faunadb": "4.3.0",
+    "gotrue-js": "0.9.29",
+    "node-fetch": "2.6.1",
+    "showdown": "1.9.1"
+  },
+  "description": "A comment engine for the modern web powered by Netlify Functions & FaunaDB, written in JavaScript, styled by CSS.",
+  "homepage": "https://www.thradtalkjs.ml/",
+  "keywords": [
+    "threadtalkjs",
+    "comments",
+    "disqus",
+    "facebook comments",
+    "gitalk",
+    "comment system",
+    "static comments",
+    "netlify",
+    "netlify functions",
+    "faunadb",
+    "comment backend"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "threadtalkjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hrishikesh-K/ThreadTalk.JS.git"
+  },
+  "version": "1.0.0"
+}

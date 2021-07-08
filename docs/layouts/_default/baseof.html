@@ -1,0 +1,276 @@
+{{- if .IsHome -}}
+  {{- .Scratch.Set "title" .Site.Title -}}
+{{- else -}}
+  {{- .Scratch.Set "title" (printf "%s | %s" .Title .Site.Title) -}}
+{{- end -}}
+{{- $description := "A comment engine for the modern web powered by Netlify Functions and FaunaDB, written in JavaScript, styled by CSS." -}}
+<!doctype html>
+{{- if ne .Layout "demo" -}}
+  <html lang = "en-IN" class = "w-screen min-h-full overflow-x-hidden">
+    <head>
+      <title>
+        {{- .Scratch.Get "title" -}}
+      </title>
+      {{- if eq .Layout (or "404" "offline") -}}
+        <meta name = "robots" content = "noindex"/>
+      {{- end -}}
+      <meta charset = "utf-8"/>
+      <meta http-equiv = "X-UA-Compatible" content = "IE=edge"/>
+      <meta name = "theme-color" content = "#f4f4f5">
+      <meta name = "turbo-cache-control" content = "no-cache"/>
+      <meta name = "description" content = "{{- $description -}}"/>
+      <meta name = "generator" content = "Hugo v{{ hugo.Version }}"/>
+      <meta name = "msapplication-config" content = "/browserconfig.xml"/>
+      <meta name = "viewport" content = "width=device-width,initial-scale=1.0"/>
+      <meta name = "keywords" content = "ThreadTalkJS, comment engine, static blog, FaunaDB comments, free comments, Netlify Functions"/>
+      <meta property = "og:type" content = "website">
+      <meta property = "og:locale" content = "en_IN">
+      <meta property = "og:image:width" content = "1200">
+      <meta property = "og:image:height" content = "638">
+      <meta property = "og:image:type" content = "image/png">
+      <meta property = "og:url" content = "{{- .Permalink -}}">
+      <meta property = "og:description" content = "{{- $description -}}">
+      <meta property = "og:title" content = "{{- .Scratch.Get `title` -}}">
+      <meta property = "og:image" content = "{{- printf `%simages/og.png` .Site.BaseURL -}}">
+      <meta property = "twitter:card" content = "summary_large_image">
+      <meta property = "twitter:url" content = "{{- .Permalink -}}">
+      <meta property = "twitter:description" content = "{{- $description -}}">
+      <meta property = "twitter:title" content = "{{- .Scratch.Get `title` -}}">
+      <meta property = "twitter:image:alt" content = "{{- .Scratch.Get `title` -}}">
+      <meta property = "twitter:image" content = "{{- printf `%simages/twitter.png` .Site.BaseURL -}}">
+      <link href = "/manifest.json" rel = "manifest"/>
+      <link href = "/images/safari-pinned.svg" rel = "mask-icon" color = "#fbbf24"/>
+      <link href = "/favicon.ico" rel = "icon" type = "image/x-icon" sizes = "32x32"/>
+      <link href = "/images/safari-home.png" rel = "apple-touch-icon" sizes = "180x180"/>
+      <link href = "{{- (resources.Get "styles.scss" | toCSS | postCSS | minify).RelPermalink -}}" rel = "stylesheet"/>
+      <script src = "{{- (resources.Get "bundle.js" | babel | js.Build | minify).RelPermalink -}}" defer></script>
+      {{- if ne .Layout (or "404" "offline") -}}
+        <script type = "application/ld+json">
+            {
+              "@context": "https://schema.org/",
+              {{- if.IsHome -}}
+                "@type": "WebSite",
+                "name": "{{- .Site.Title -}}",
+                "url": {{- .Site.BaseURL -}}
+              {{- else if eq .Title "Documentation" -}}
+                "@graph":
+                [{
+                  "@type": "WebSite",
+                  "name": "{{- .Site.Title -}}",
+                  "url": {{- .Site.BaseURL -}}
+                },
+                {
+                  "@type": "BreadcrumbList",
+                  "name": "Section Breadcrumbs",
+                  "itemListElement": [{
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "{{- .Site.Title -}}",
+                    "item": {{- .Site.BaseURL -}}
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "{{- .Title -}}",
+                    "item": {{- .Permalink -}}
+                  }]
+                }]
+              {{- else if .IsPage -}}
+                "@graph":
+                [{
+                  "@type": "WebSite",
+                  "name": "{{- .Site.Title -}}",
+                  "url": {{- .Site.BaseURL -}}
+                },
+                {
+                  "@type": "Article",
+                  "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": {{- .Permalink -}}
+                  },
+                  "headline": "{{- .Title -}}",
+                  "description": "{{- $description -}}",
+                  "image": [
+                    {{- printf "%simages/structured-1x1.png" .Site.BaseURL -}},
+                    {{- printf "%simages/structured-4x3.png" .Site.BaseURL -}},
+                    {{- printf "%simages/structured-16x9.png" .Site.BaseURL -}}
+                  ],
+                  "author": {
+                    "@type": "Organization",
+                    "name": "{{- .Site.Title -}}"
+                  },
+                  "publisher": {
+                    "@type": "Organization",
+                    "name": "{{- .Site.Title -}}",
+                    "logo": {
+                      "@type": "ImageObject",
+                      "url": "{{- printf "%simages/logo.png" .Site.BaseURL -}}"
+                    }
+                  },
+                  "datePublished": "{{- now.Format "2006-01-02" -}}",
+                  "dateModified": "{{- now.Format "2006-01-02" -}}"
+                },
+                {
+                  "@type": "BreadcrumbList",
+                  "name": "Page Breadcrumbs",
+                  "itemListElement": [{
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "{{- .Site.Title -}}",
+                    "item": {{- .Site.BaseURL -}}
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "{{- humanize .Section -}}",
+                    "item": {{- printf "%s%s/" .Site.BaseURL (lower .Section) -}}
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "{{- .Title -}}",
+                    "item": {{- .Permalink -}}
+                  }]
+                }]
+              {{- end -}}
+            }
+        </script>
+      {{- end -}}
+    </head>
+    <body class = "w-full min-h-full bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 leading-relaxed scrollbar-thin scrollbar-thumb-yellow-400 scrollbar-track-gray-200 dark:scrollbar-track-gray-700">
+      <header id = "header" class = "fixed w-full top-0 z-10 p-5 bg-gray-100 dark:bg-gray-800" data-turbo-permanent>
+        <div class = "h-20 p-2.5 flex justify-between items-center rounded-md bg-gray-200 dark:bg-gray-700">
+          <div>
+            <a href = "/" class = "flex items-center space-x-2.5">
+              <div class = "w-14">
+                <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 512 512">
+                  <path fill = "#FBBF24" d = "M345 157c-13,0 -23,-10 -23,-23 0,-13 10,-23 23,-23l144 0c13,0 23,10 23,23l0 0 0 86c0,13 -10,23 -23,23l-122 0 0 222c0,13 -10,23 -23,23l-173 0c-13,0 -23,-10 -23,-23l0 -221 -125 0c-13,0 -23,-10 -23,-23 0,-13 10,-23 23,-23l148 0c13,0 23,10 23,23l0 221 127 0 0 -222c0,-13 10,-23 23,-23l122 0 0 -40 -121 0zm144 -132c13,0 23,10 23,23 0,13 -10,23 -23,23l-443 0 0 40 211 0c13,0 23,10 23,23l0 244c0,13 -10,23 -23,23 -13,0 -23,-10 -23,-23l0 -221 -211 0c-13,0 -23,-10 -23,-23l0 -86c0,-13 10,-23 23,-23l466 0z"/>
+                </svg>
+              </div>
+              <div>
+                <p class = "text-3xl truncate">
+                  {{- .Site.Title -}}
+                </p>
+              </div>
+            </a>
+          </div>
+          <div class = "relative group">
+            <div class = "h-10 w-10 m:hidden">
+              <button class = "focus:outline-none" aria-label = "navigation">
+                <svg xmlns = "http://www.w3.org/2000/svg" fill = "none" class = "h-10 w-10 stroke-current" viewBox = "0 0 24 24">
+                  <path stroke-linecap = "round" stroke-linejoin = "round" stroke-width = "2" d = "M4 6h16M4 12h16m-7 6h7"/>
+                </svg>
+              </button>
+            </div>
+            <nav class = "absolute m:relative right-0 hidden group-hover:block m:group-hover:flex m:flex m:items-center flex-col m:flex-row rounded-md m:rounded-none px-2.5 m:p-0 m:space-x-2.5 bg-gray-200 dark:bg-gray-700 ring ring-gray-500 ring-opacity-50 m:ring-0 divide-y divide-gray-500 divide-opacity-50 m:divide-none z-50">
+              <div class = "cursor-pointer rounded-md bg-yellow-400 bg-opacity-0 m:hover:bg-opacity-25">
+                <svg xmlns = "http://www.w3.org/2000/svg" fill = "none" class = "h-12 w-12 ml-auto m:ml-0 p-2.5 stroke-current" viewBox = "0 0 24 24">
+                  <path stroke-linecap = "round" stroke-linejoin = "round" stroke-width = "2" d = ""/>
+                </svg>
+              </div>
+              <div class = "text-right">
+                <a href = "/demo/" class = "text-xl inline-block w-full p-2.5 rounded-md bg-yellow-400 bg-opacity-0 m:hover:bg-opacity-25" data-turbo = "false">
+                  Demo
+                </a>
+              </div>
+              <div class = "text-right">
+                <a href = "/documentation/" class = "text-xl inline-block w-full p-2.5 rounded-md bg-yellow-400 bg-opacity-0 m:bg-opacity-25 m:hover:bg-opacity-50">
+                  Documentation
+                </a>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </header>
+      <main class = "absolute w-full p-5">
+        <div class = "flex flex-wrap m:block">
+          {{- block "main" . -}}
+          {{- end -}}
+        </div>
+        <footer class = "mt-5">
+          <p class = "text-center">
+            &copy; {{ now.Year }} {{ .Site.Title }}
+          </p>
+        </footer>
+      </main>
+      <a href = "#top" class = "fixed right-5 bottom-5 p-2.5 rounded-md bg-yellow-400 bg-opacity-25 hover:bg-opacity-50 group" data-turbo = "false" aria-label = "scroll-to-top">
+        <svg xmlns = "http://www.w3.org/2000/svg" fill = "none" class = "h-5 w-5 stroke-current transform group-hover:-translate-y-1 transition-transform" viewBox = "0 0 24 24">
+          <path stroke-linecap = "round" stroke-linejoin = "round" stroke-width = "2" d = "M5 15l7-7 7 7"/>
+        </svg>
+      </a>
+    </body>
+  </html>
+{{- else -}}
+  <html lang = "en">
+    <head>
+      <title>
+        {{- .Scratch.Get "title" -}}
+      </title>
+      <meta charset = "utf-8">
+      <meta name = "viewport" content = "width=device-width,initial-scale=1.0">
+      <script src = "{{- (resources.Get "demo/bundle.js" | js.Build | minify).RelPermalink -}}" defer></script>
+      <link href = "{{- (resources.Get "demo/styles.scss" | toCSS | minify).RelPermalink -}}" rel = "stylesheet">
+      <style>
+        * {
+          margin: 0;
+          overflow-x: hidden;
+          box-sizing: border-box;
+        }
+
+        * + * {
+          margin-top: 15px;
+        }
+
+        *:focus {
+          outline: none;
+        }
+
+        body {
+          margin: 0;
+          height: 100%;
+          padding: 15px;
+          font-family: sans-serif;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 5px;
+        }
+
+        input {
+          height: 40px;
+          padding: 0 10px;
+        }
+
+        button {
+          border: none;
+          color: #f4f4f5;
+          cursor: pointer;
+          padding: 0 30px;
+          line-height: 40px;
+          font-size: .875rem;
+          background: #fbbf24;
+        }
+
+        textarea {
+          padding: 10px;
+        }
+
+        input, textarea {
+          margin: 0;
+          color: #666;
+          width: 100%;
+          font: inherit;
+          border: 1px solid #e5e5e5;
+        }
+
+        input:focus, textarea:focus {
+          border-color: #fbbf24;
+        }
+      </style>
+    </head>
+    <body>
+      {{- .Content -}}
+    </body>
+  </html>
+{{- end -}}

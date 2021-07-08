@@ -1,0 +1,1 @@
+{"name":"ThreadTalk.JS","short_name":"ThreadTalk.JS","icons":[{"sizes":"192x192","type":"image/png","purpose":"any maskable","src":"/images/chrome-icon-192.png"},{"sizes":"512x512","type":"image/png","purpose":"any maskable","src":"/images/chrome-icon-512.png"}],"theme_color":"#f4f4f5","background_color":"#f4f4f5","start_url":"/?=pwa","display":"standalone"}

@@ -1,0 +1,16 @@
+{{- define "main" -}}
+  <div class = "w-full">
+    <p class = "text-4xl m:text-6xl l:text-7xl text-center">
+      Page not found
+    </p>
+  </div>
+  <div class = "h-72 m:h-96 w-72 m:w-96 m-auto mt-5 lottie" data-lottie = "5">
+    {{- partial "loading.html" . -}}
+  </div>
+  <p class = "max-w-5xl m-auto mt-5 text-xl m:text-2xl l:text-3xl text-center">
+    Unfortunately, you've hit a route that doesn't exist. But, worry not! Conversation can continue by returning home.
+  </p>
+  <a href = "/" class = "mt-5 w-56 block m-auto mt-5 p-2.5 text-xl text-center rounded-md bg-yellow-400 bg-opacity-25 hover:bg-opacity-50">
+    Return home
+  </a>
+{{- end -}}

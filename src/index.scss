@@ -1,0 +1,307 @@
+$t-spacing: 15px !default;
+$t-primary: #fbbf24 !default;
+$t-light-muted: #e5e5e5 !default;
+$t-color-inverted: #f4f4f5 !default;
+
+[t-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.t-shake {
+  animation: t-shake;
+}
+
+.t-animation {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-timing-function: ease-out;
+}
+
+.t-label {
+
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 2.5px 5px;
+  display: inline-block;
+  background: $t-primary;
+  color: $t-color-inverted;
+
+  & > span > a {
+    color: $t-color-inverted !important;
+  }
+
+  & > span + span {
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+}
+
+.t-comment {
+
+  padding: $t-spacing;
+  background: $t-light-muted;
+
+  * + * {
+    margin-top: $t-spacing;
+  }
+
+  a {
+    color: inherit !important;
+  }
+
+  ul {
+    padding-left: $t-spacing;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 50vh;
+  }
+
+  blockquote {
+    padding-left: $t-spacing;
+    border-left: 1px black solid;
+  }
+
+  table, th, td {
+    border: 1px black solid;
+  }
+
+  & > div:first-child > div {
+    display: flex;
+    align-items: center;
+  }
+
+  & > div:first-child > div > div:last-child {
+    overflow: hidden;
+    white-space: nowrap;
+    width: calc(100% - 95px);
+    margin: 0 0 0 $t-spacing;
+  }
+
+  & > div:first-child > div > div:last-child > h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  & > div:first-child > div > div:first-child > div {
+    width: 80px;
+    height: 80px;
+  }
+
+  & > div:first-child > div > div:first-child > div > h3 {
+    line-height: 80px;
+    text-align: center;
+    color: $t-color-inverted;
+  }
+
+  & > div:first-child ul {
+    margin: 0;
+    padding: 0;
+    color: #999;
+    display: flex;
+    list-style: none;
+    font-size: .875rem;
+  }
+
+  & > div:first-child ul > li {
+    margin: 0;
+  }
+
+  & > div:first-child ul > li:first-child {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: calc(2*(100%/3));
+  }
+
+  & > div:first-child ul > li:not(li:last-child):after {
+    content: '•';
+    margin: 0 5px;
+  }
+
+}
+
+.t-notification {
+
+  margin: 0;
+  height: 50px;
+  width: 350px;
+  bottom: 15px;
+  padding: 15px;
+  z-index: 1000;
+  position: fixed;
+  background: $t-primary;
+  color: $t-color-inverted;
+  left: calc((100vw - 350px)/2);
+  animation-name: t-fade-bottom-reverse;
+
+  & > div {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    border: 2.5px solid rgba(255, 255, 255, .25);
+    border-top-color: $t-color-inverted;
+    animation: t-spinner 1s ease-in-out infinite;
+  }
+
+  & > span > a {
+    color: $t-color-inverted !important;
+  }
+
+  & > div + span {
+    margin: 0 0 0 10px;
+    vertical-align: bottom;
+  }
+
+  & > span + span {
+    margin: 0;
+    float: right;
+    cursor: pointer;
+  }
+
+  &.t-fade-bottom {
+    animation-name: t-fade-bottom;
+  }
+
+}
+
+.t-modal {
+
+  top: 0;
+  left: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  padding: 30px;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+
+  & > div {
+    height: 100%;
+    background: #fff;
+    position: relative;
+    padding: $t-spacing;
+    animation-name: t-scale-up-reverse;
+  }
+
+  & > div > h3 {
+    height: 34px;
+  }
+
+  & > div > hr {
+    margin: 0;
+  }
+
+  &  > div > div {
+    height: calc(100% - 51px);
+  }
+
+  & > div > span {
+    top: 0;
+    right: 0;
+    margin: 0;
+    width: 50px;
+    padding: 15px;
+    cursor: pointer;
+    line-height: 0.86;
+    position: absolute;
+    font-size: x-large;
+  }
+
+  &.t-scale-up > div {
+    animation-name: t-scale-up;
+  }
+
+}
+
+@keyframes t-shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-9px);
+  }
+  20% {
+    transform: translateX(8px);
+  }
+  30% {
+    transform: translateX(-7px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  60% {
+    transform: translateX(4px);
+  }
+  70% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+  90% {
+    transform: translateX(-1px);
+  }
+}
+
+@keyframes t-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes t-scale-up {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes t-fade-bottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes t-scale-up-reverse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes t-fade-bottom-reverse {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+@media screen and (max-width: (350px + (2 * $t-spacing))) {
+  .t-notification {
+    left: $t-spacing;
+    width: calc(100vw - (2 * #{$t-spacing}));
+  }
+}
